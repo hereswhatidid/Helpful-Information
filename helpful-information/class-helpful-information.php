@@ -24,7 +24,7 @@ class Helpful_Information {
 	 *
 	 * @var     string
 	 */
-	protected $version = '1.0.1';
+	protected $version = '1.0.2';
 
 	/**
 	 * Unique identifier for the plugin.
@@ -62,13 +62,14 @@ class Helpful_Information {
 
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		add_action( 'init', array( $this, 'initialize_helpful_information' ) );
 
 		// Add the options page and menu item.
 		// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
-		add_action( 'wp_before_admin_bar_render', array( $this, 'add_helpful_information' ) ); 
 
 	}
+
 
 	/**
 	 * Return an instance of this class.
@@ -145,15 +146,25 @@ class Helpful_Information {
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
 	}
-
+	/**
+	 * Initialize the generation of the Helpful Information tab
+	 * @author 		Gabe Shackle <gabe@hereswhatidid.com>
+	 * @since    	1.0.2
+	 * @return 		void
+	 */
+	public function initialize_helpful_information() {
+		if ( current_user_can('activate_plugins') ) {
+			add_action( 'wp_before_admin_bar_render', array( $this, 'add_helpful_information' ) ); 
+		}
+	}
+	/**
+	 * Generate the Helpful Information tab
+	 * @author Gabe Shackle <gabe@hereswhatidid.com>
+	 */
 	public function add_helpful_information() {
 			global $wp_admin_bar,
 				   $wp_scripts,
 				   $wp_styles;
-
-			if ( ! current_user_can('activate_plugins') ) {
-				exit;
-			}
 
 			$wp_admin_bar->add_node( array(
 				'id' => 'helpful_information',

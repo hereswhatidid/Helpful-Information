@@ -16,7 +16,7 @@
  * Plugin Name: Helpful Information
  * Plugin URI:  http://hereswhatidid.com/helpful-information
  * Description: The Helpful Information plugin for WordPress is a small addon to the standard admin bar that contains several bits of helpful information pertaining to what you are currently viewing
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Gabe Shackle
  * Author URI:  http://hereswhatidid.com
  * Text Domain: helpful-information-locale
